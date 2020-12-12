@@ -46,7 +46,7 @@ import kotlinx.android.synthetic.main.fragment_second.*
 
                 if(it != null ) {
 
-                    txtname2.setText(it.name)
+                    txtname2.text = it.name
                     txtdes2.setText(it.description)
                     txtPrice2.setText(it.price.toString())
                     txtlasp2.setText(it.lastPrice.toString())
@@ -56,7 +56,7 @@ import kotlinx.android.synthetic.main.fragment_second.*
                             .into(imgdetails)
                 }
             })
-        
+
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)

@@ -4,6 +4,8 @@ package com.example.myphone.pojo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import org.jetbrains.annotations.NotNull
+
 @Entity(tableName = "details_table")
 data class detailsItem(
     @SerializedName("credit")

@@ -6,12 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.myphone.pojo.detailsItem
+import com.example.myphone.viewModel.PhoneViewModel
+import kotlinx.android.synthetic.main.fragment_second.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class SecondFragment : Fragment() {
+
+ class SecondFragment : Fragment() {
+    lateinit var mViewModel : PhoneViewModel
+    lateinit var phone: detailsItem
+    var mId: Int = 1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProvider(this).get(PhoneViewModel::class.java)
+        arguments?.let {
+            mId = it.getInt("id",1)
+        }
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +40,21 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+        mViewModel.getOneGo(mId).observe(viewLifecycleOwner, Observer {
+
+
+            txtname2.setText(it.name)
+            txtdes2.setText(it.description)
+            txtPrice2.setText(it.price.toString())
+            txtlasp2.setText(it.lastPrice.toString())
+            txtcred2.setText(it.credit.toString())
+
+            Glide.with(this).load(it.image).into(imgdetails)
+
+        })
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)

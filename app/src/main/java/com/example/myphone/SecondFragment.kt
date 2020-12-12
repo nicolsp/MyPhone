@@ -58,8 +58,6 @@ import kotlinx.android.synthetic.main.fragment_second.*
             })
 
 
-
-
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }

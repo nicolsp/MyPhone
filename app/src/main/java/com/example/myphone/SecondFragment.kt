@@ -42,19 +42,23 @@ import kotlinx.android.synthetic.main.fragment_second.*
         super.onViewCreated(view, savedInstanceState)
 
 
+            mViewModel.getOneGo(mId).observe(viewLifecycleOwner, Observer {
 
-        mViewModel.getOneGo(mId).observe(viewLifecycleOwner, Observer {
+                if(it != null ) {
+
+                    txtname2.setText(it.name)
+                    txtdes2.setText(it.description)
+                    txtPrice2.setText(it.price.toString())
+                    txtlasp2.setText(it.lastPrice.toString())
+                    txtcred2.setText(it.credit.toString())
+
+                    Glide.with(this).load(it.image).transform(CenterCrop(), RoundedCorners(20))
+                            .into(imgdetails)
+                }
+            })
 
 
-            txtname2.setText(it.name)
-            txtdes2.setText(it.description)
-            txtPrice2.setText(it.price.toString())
-            txtlasp2.setText(it.lastPrice.toString())
-            txtcred2.setText(it.credit.toString())
 
-            Glide.with(this).load(it.image).into(imgdetails)
-
-        })
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)

@@ -1,11 +1,12 @@
 package com.example.myphone.room
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.myphone.pojo.detailsItem
-
+@Dao
 interface DetailsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

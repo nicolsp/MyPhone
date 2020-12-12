@@ -1,11 +1,9 @@
 package com.example.myphone.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.myphone.pojo.PhoneItem
-
+@Dao
 interface PhoneDao {
 
 
@@ -18,4 +16,6 @@ interface PhoneDao {
     @Query("SELECT * FROM phone_table WHERE id=:mID")
     fun getOne(mID: Int): LiveData<PhoneItem>
 
+   // @Update
+    //suspend fun updatePhone()
 }

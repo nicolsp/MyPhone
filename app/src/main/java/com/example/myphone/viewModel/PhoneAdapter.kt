@@ -21,17 +21,20 @@ class PhoneAdapter( var mPhoneID: PhoneID ) : RecyclerView.Adapter<PhoneAdapter.
         notifyDataSetChanged()
     }
 
-    inner class mViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class mViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
         val mPhoneimg = itemView.imgPhone
         val mName = itemView.txtname
         val mId = itemView.txtid
         val mPhonePrice = itemView.txtPrice
+          val itemView = itemView.setOnClickListener(this)
 
-        val itemView = itemView.setOnClickListener {
-            mPhoneID.passData(mdetList[adapterPosition])
+       // val itemView = itemView.setOnClickListener {
+         //   mPhoneID.passData(mdetList[adapterPosition].id)
+        //}
+
+        override fun onClick(p0: View?) {
+            mdetList[adapterPosition].id?.let { mPhoneID.passData(it) }
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): mViewHolder {
@@ -57,7 +60,7 @@ class PhoneAdapter( var mPhoneID: PhoneID ) : RecyclerView.Adapter<PhoneAdapter.
     override fun getItemCount() = mdetList.size
 
     interface  PhoneID{
-        fun passData(mPhoneID: PhoneItem)
+        fun passData(mPhoneID: Int)
     }
 
 }
